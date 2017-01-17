@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="petstationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="animalData">
+          <Key>
+            <PropertyRef Name="animalID" />
+          </Key>
+          <Property Name="animalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="animalData_animalTypeID" Type="int" />
+          <Property Name="animalName" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalGender" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalAge" Type="int" />
+          <Property Name="animalColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalBirth" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalChip" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalHealthy" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalDisease_Other" Type="nvarchar" MaxLength="200" />
+          <Property Name="animalOwner_userID" Type="int" />
+          <Property Name="animalReason" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalGetter_userID" Type="int" />
+          <Property Name="animalAdopted" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalAdoptedDate" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalNote" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="animalData_Condition">
+          <Key>
+            <PropertyRef Name="conditionID" />
+          </Key>
+          <Property Name="conditionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="condition_animalID" Type="int" />
+          <Property Name="conditionAge" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionEconomy" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionHome" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionFamily" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionReply" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionPaper" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionFee" Type="nvarchar" MaxLength="50" />
+          <Property Name="conditionOther" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="animalData_Pic">
+          <Key>
+            <PropertyRef Name="animalPicID" />
+          </Key>
+          <Property Name="animalPicID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="animalPic_animalID" Type="int" />
+          <Property Name="animalPicAddress" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="animalData_Type">
+          <Key>
+            <PropertyRef Name="animalTypeID" />
+          </Key>
+          <Property Name="animalTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="animalKind" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__animalDat__anima__286302EC">
+          <End Role="animalData_Type" Type="Self.animalData_Type" Multiplicity="0..1" />
+          <End Role="animalData" Type="Self.animalData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData_Type">
+              <PropertyRef Name="animalTypeID" />
+            </Principal>
+            <Dependent Role="animalData">
+              <PropertyRef Name="animalData_animalTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animalDat__anima__38996AB5">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+          <End Role="animalData_Pic" Type="Self.animalData_Pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData">
+              <PropertyRef Name="animalID" />
+            </Principal>
+            <Dependent Role="animalData_Pic">
+              <PropertyRef Name="animalPic_animalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animalDat__condi__3B75D760">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+          <End Role="animalData_Condition" Type="Self.animalData_Condition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData">
+              <PropertyRef Name="animalID" />
+            </Principal>
+            <Dependent Role="animalData_Condition">
+              <PropertyRef Name="condition_animalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animalDat__condi__440B1D61">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+          <End Role="animalData_Condition" Type="Self.animalData_Condition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData">
+              <PropertyRef Name="animalID" />
+            </Principal>
+            <Dependent Role="animalData_Condition">
+              <PropertyRef Name="condition_animalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="petstationModelStoreContainer">
+          <EntitySet Name="animalData" EntityType="Self.animalData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="animalData_Condition" EntityType="Self.animalData_Condition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="animalData_Pic" EntityType="Self.animalData_Pic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="animalData_Type" EntityType="Self.animalData_Type" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__animalDat__anima__286302EC" Association="Self.FK__animalDat__anima__286302EC">
+            <End Role="animalData_Type" EntitySet="animalData_Type" />
+            <End Role="animalData" EntitySet="animalData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animalDat__anima__38996AB5" Association="Self.FK__animalDat__anima__38996AB5">
+            <End Role="animalData" EntitySet="animalData" />
+            <End Role="animalData_Pic" EntitySet="animalData_Pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animalDat__condi__3B75D760" Association="Self.FK__animalDat__condi__3B75D760">
+            <End Role="animalData" EntitySet="animalData" />
+            <End Role="animalData_Condition" EntitySet="animalData_Condition" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animalDat__condi__440B1D61" Association="Self.FK__animalDat__condi__440B1D61">
+            <End Role="animalData" EntitySet="animalData" />
+            <End Role="animalData_Condition" EntitySet="animalData_Condition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="petstationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="animalData">
+          <Key>
+            <PropertyRef Name="animalID" />
+          </Key>
+          <Property Name="animalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="animalData_animalTypeID" Type="Int32" />
+          <Property Name="animalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalGender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalAge" Type="Int32" />
+          <Property Name="animalColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalChip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalHealthy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalDisease_Other" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="animalOwner_userID" Type="Int32" />
+          <Property Name="animalReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalGetter_userID" Type="Int32" />
+          <Property Name="animalAdopted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalAdoptedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="animalData_Type" Relationship="Self.FK__animalDat__anima__286302EC" FromRole="animalData" ToRole="animalData_Type" />
+          <NavigationProperty Name="animalData_Pic" Relationship="Self.FK__animalDat__anima__38996AB5" FromRole="animalData" ToRole="animalData_Pic" />
+          <NavigationProperty Name="animalData_Condition" Relationship="Self.FK__animalDat__condi__3B75D760" FromRole="animalData" ToRole="animalData_Condition" />
+          <NavigationProperty Name="animalData_Condition1" Relationship="Self.FK__animalDat__condi__440B1D61" FromRole="animalData" ToRole="animalData_Condition" />
+        </EntityType>
+        <EntityType Name="animalData_Condition">
+          <Key>
+            <PropertyRef Name="conditionID" />
+          </Key>
+          <Property Name="conditionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="condition_animalID" Type="Int32" />
+          <Property Name="conditionAge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionEconomy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionHome" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionFamily" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionReply" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionPaper" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionFee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="conditionOther" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="animalData" Relationship="Self.FK__animalDat__condi__3B75D760" FromRole="animalData_Condition" ToRole="animalData" />
+          <NavigationProperty Name="animalData1" Relationship="Self.FK__animalDat__condi__440B1D61" FromRole="animalData_Condition" ToRole="animalData" />
+        </EntityType>
+        <EntityType Name="animalData_Pic">
+          <Key>
+            <PropertyRef Name="animalPicID" />
+          </Key>
+          <Property Name="animalPicID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="animalPic_animalID" Type="Int32" />
+          <Property Name="animalPicAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="animalData" Relationship="Self.FK__animalDat__anima__38996AB5" FromRole="animalData_Pic" ToRole="animalData" />
+        </EntityType>
+        <EntityType Name="animalData_Type">
+          <Key>
+            <PropertyRef Name="animalTypeID" />
+          </Key>
+          <Property Name="animalTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="animalKind" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="animalData" Relationship="Self.FK__animalDat__anima__286302EC" FromRole="animalData_Type" ToRole="animalData" />
+        </EntityType>
+        <Association Name="FK__animalDat__anima__286302EC">
+          <End Role="animalData_Type" Type="Self.animalData_Type" Multiplicity="0..1" />
+          <End Role="animalData" Type="Self.animalData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData_Type">
+              <PropertyRef Name="animalTypeID" />
+            </Principal>
+            <Dependent Role="animalData">
+              <PropertyRef Name="animalData_animalTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animalDat__anima__38996AB5">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+          <End Role="animalData_Pic" Type="Self.animalData_Pic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData">
+              <PropertyRef Name="animalID" />
+            </Principal>
+            <Dependent Role="animalData_Pic">
+              <PropertyRef Name="animalPic_animalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animalDat__condi__3B75D760">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+          <End Role="animalData_Condition" Type="Self.animalData_Condition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData">
+              <PropertyRef Name="animalID" />
+            </Principal>
+            <Dependent Role="animalData_Condition">
+              <PropertyRef Name="condition_animalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__animalDat__condi__440B1D61">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+          <End Role="animalData_Condition" Type="Self.animalData_Condition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalData">
+              <PropertyRef Name="animalID" />
+            </Principal>
+            <Dependent Role="animalData_Condition">
+              <PropertyRef Name="condition_animalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="petstationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="animalData" EntityType="Self.animalData" />
+          <EntitySet Name="animalData_Condition" EntityType="Self.animalData_Condition" />
+          <EntitySet Name="animalData_Pic" EntityType="Self.animalData_Pic" />
+          <EntitySet Name="animalData_Type" EntityType="Self.animalData_Type" />
+          <AssociationSet Name="FK__animalDat__anima__286302EC" Association="Self.FK__animalDat__anima__286302EC">
+            <End Role="animalData_Type" EntitySet="animalData_Type" />
+            <End Role="animalData" EntitySet="animalData" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animalDat__anima__38996AB5" Association="Self.FK__animalDat__anima__38996AB5">
+            <End Role="animalData" EntitySet="animalData" />
+            <End Role="animalData_Pic" EntitySet="animalData_Pic" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animalDat__condi__3B75D760" Association="Self.FK__animalDat__condi__3B75D760">
+            <End Role="animalData" EntitySet="animalData" />
+            <End Role="animalData_Condition" EntitySet="animalData_Condition" />
+          </AssociationSet>
+          <AssociationSet Name="FK__animalDat__condi__440B1D61" Association="Self.FK__animalDat__condi__440B1D61">
+            <End Role="animalData" EntitySet="animalData" />
+            <End Role="animalData_Condition" EntitySet="animalData_Condition" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="petstationModelStoreContainer" CdmEntityContainer="petstationEntities">
+          <EntitySetMapping Name="animalData">
+            <EntityTypeMapping TypeName="petstationModel.animalData">
+              <MappingFragment StoreEntitySet="animalData">
+                <ScalarProperty Name="animalID" ColumnName="animalID" />
+                <ScalarProperty Name="animalData_animalTypeID" ColumnName="animalData_animalTypeID" />
+                <ScalarProperty Name="animalName" ColumnName="animalName" />
+                <ScalarProperty Name="animalAddress" ColumnName="animalAddress" />
+                <ScalarProperty Name="animalDate" ColumnName="animalDate" />
+                <ScalarProperty Name="animalGender" ColumnName="animalGender" />
+                <ScalarProperty Name="animalAge" ColumnName="animalAge" />
+                <ScalarProperty Name="animalColor" ColumnName="animalColor" />
+                <ScalarProperty Name="animalBirth" ColumnName="animalBirth" />
+                <ScalarProperty Name="animalChip" ColumnName="animalChip" />
+                <ScalarProperty Name="animalHealthy" ColumnName="animalHealthy" />
+                <ScalarProperty Name="animalDisease_Other" ColumnName="animalDisease_Other" />
+                <ScalarProperty Name="animalOwner_userID" ColumnName="animalOwner_userID" />
+                <ScalarProperty Name="animalReason" ColumnName="animalReason" />
+                <ScalarProperty Name="animalGetter_userID" ColumnName="animalGetter_userID" />
+                <ScalarProperty Name="animalAdopted" ColumnName="animalAdopted" />
+                <ScalarProperty Name="animalAdoptedDate" ColumnName="animalAdoptedDate" />
+                <ScalarProperty Name="animalNote" ColumnName="animalNote" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animalData_Condition">
+            <EntityTypeMapping TypeName="petstationModel.animalData_Condition">
+              <MappingFragment StoreEntitySet="animalData_Condition">
+                <ScalarProperty Name="conditionID" ColumnName="conditionID" />
+                <ScalarProperty Name="condition_animalID" ColumnName="condition_animalID" />
+                <ScalarProperty Name="conditionAge" ColumnName="conditionAge" />
+                <ScalarProperty Name="conditionEconomy" ColumnName="conditionEconomy" />
+                <ScalarProperty Name="conditionHome" ColumnName="conditionHome" />
+                <ScalarProperty Name="conditionFamily" ColumnName="conditionFamily" />
+                <ScalarProperty Name="conditionReply" ColumnName="conditionReply" />
+                <ScalarProperty Name="conditionPaper" ColumnName="conditionPaper" />
+                <ScalarProperty Name="conditionFee" ColumnName="conditionFee" />
+                <ScalarProperty Name="conditionOther" ColumnName="conditionOther" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animalData_Pic">
+            <EntityTypeMapping TypeName="petstationModel.animalData_Pic">
+              <MappingFragment StoreEntitySet="animalData_Pic">
+                <ScalarProperty Name="animalPicID" ColumnName="animalPicID" />
+                <ScalarProperty Name="animalPic_animalID" ColumnName="animalPic_animalID" />
+                <ScalarProperty Name="animalPicAddress" ColumnName="animalPicAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animalData_Type">
+            <EntityTypeMapping TypeName="petstationModel.animalData_Type">
+              <MappingFragment StoreEntitySet="animalData_Type">
+                <ScalarProperty Name="animalTypeID" ColumnName="animalTypeID" />
+                <ScalarProperty Name="animalKind" ColumnName="animalKind" />
+                <ScalarProperty Name="animalType" ColumnName="animalType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
