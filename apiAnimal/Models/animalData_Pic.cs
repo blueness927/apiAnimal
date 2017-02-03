@@ -9,15 +9,17 @@
 
 namespace apiAnimal.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class animalData_Pic
     {
         public int animalPicID { get; set; }
         public Nullable<int> animalPic_animalID { get; set; }
         public string animalPicAddress { get; set; }
-    
+
+        [JsonIgnore]
         public virtual animalData animalData { get; set; }
     }
 }

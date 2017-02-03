@@ -9,47 +9,65 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using apiAnimal.Models;
+using System.Web.Http.Cors;
+
+
 
 namespace apiAnimal.Controllers.v1
 {
-    public class AnimalDatasController : ApiController
+    public class AnimalDatasController : BaseController
     {
-        private petstationEntities db = new petstationEntities();
+        
         /// <summary>
         /// 取得所有動物資料
         /// </summary>
         /// <returns>IQueryable &lt; Animal&gt;.</returns>
-        // GET: api/AnimalDatas
-        [Queryable]
-        public IQueryable<animalData> GetanimalData()
+        ///GET: api/v1/AnimalDatas
+       [EnableCors(origins: "*", headers: "*", methods: "*")]
+       [Queryable]
+       public IQueryable<animalData>GetanimalData()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            return db.animalData;
+            var animal = db.animalData.Include(p => p.animalData_Pic)
+                                     .Include(c=>c.animalData_Condition)
+                                     .AsQueryable();
+
+            return animal;
         }
+
         /// <summary>
         /// 取得單筆動物資料
         /// </summary>
         /// <param name="id">The identifier</param>
         /// <returns>IHttpActionResult.</returns>
-        // GET: api/AnimalDatas/5
+        //GET: api/v1/AnimalDatas/5
         [ResponseType(typeof(animalData))]
         public IHttpActionResult GetanimalData(int id)
         {
-            animalData animalData = db.animalData.Find(id);
-            if (animalData == null)
+            db.Configuration.ProxyCreationEnabled = false;
+            //animalData animalData = db.animalData.Find(id);
+
+            var animal = db.animalData.Include(p => p.animalData_Pic)
+                                      .Include(c => c.animalData_Condition)
+                                      .AsQueryable().FirstOrDefault(r=>r.animalID==id);
+
+            if (animal == null)
             {
                 return NotFound();
             }
 
-            return Ok(animalData);
+            return Ok(animal);
         }
+
+
+
         /// <summary>
         /// 修改單筆動物資料
         /// </summary>
         /// <param name="id">The identifier</param>
         /// <param name="animalData">The AnimalDatas</param>
         /// <returns>IHttpActionResult.</returns>
-        // PUT: api/AnimalDatas/5
+        // PUT: api/v1/AnimalDatas/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutanimalData(int id, animalData animalData)
         {
@@ -57,14 +75,12 @@ namespace apiAnimal.Controllers.v1
             {
                 return BadRequest(ModelState);
             }
-
             if (id != animalData.animalID)
             {
                 return BadRequest();
             }
 
             db.Entry(animalData).State = EntityState.Modified;
-
             try
             {
                 db.SaveChanges();
@@ -82,13 +98,14 @@ namespace apiAnimal.Controllers.v1
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+
         }
         /// <summary>
         /// 新增動物資料
         /// </summary>
         /// <param name="animalData">The AnimalDatas</param>
         /// <returns>IHttpActionResult.</returns>
-        // POST: api/AnimalDatas
+        // POST: api/v1/AnimalDatas
         [ResponseType(typeof(animalData))]
         public IHttpActionResult PostanimalData(animalData animalData)
         {
@@ -98,16 +115,17 @@ namespace apiAnimal.Controllers.v1
             }
 
             db.animalData.Add(animalData);
+          
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = animalData.animalID }, animalData);
+            return CreatedAtRoute("Apiv1", new { id = animalData.animalID }, animalData);
         }
         /// <summary>
         /// 刪除單筆動物資料
         /// </summary>
         /// <param name="id"></param>
         /// <returns>IHttpActionResult.</returns>
-        // DELETE: api/AnimalDatas/5
+        // DELETE: api/v1/AnimalDatas/5
         [ResponseType(typeof(animalData))]
         public IHttpActionResult DeleteanimalData(int id)
         {
@@ -123,6 +141,7 @@ namespace apiAnimal.Controllers.v1
             return Ok(animalData);
         }
 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -131,6 +150,7 @@ namespace apiAnimal.Controllers.v1
             }
             base.Dispose(disposing);
         }
+
 
         private bool animalDataExists(int id)
         {

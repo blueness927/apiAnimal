@@ -9,9 +9,10 @@
 
 namespace apiAnimal.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class animalData_Condition
     {
         public int conditionID { get; set; }
@@ -24,8 +25,8 @@ namespace apiAnimal.Models
         public string conditionPaper { get; set; }
         public string conditionFee { get; set; }
         public string conditionOther { get; set; }
-    
+
+        [JsonIgnore]
         public virtual animalData animalData { get; set; }
-        public virtual animalData animalData1 { get; set; }
     }
 }

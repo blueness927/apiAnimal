@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace apiAnimal.Models
 {
@@ -13,7 +14,8 @@ namespace apiAnimal.Models
         public class animalDataMD
         {
             public int animalID { get; set; }
-            public Nullable<int> animalData_animalTypeID { get; set; }
+            public string animalKind { get; set; }
+            public string animalType { get; set; }
             public string animalName { get; set; }
             public string animalAddress { get; set; }
             public string animalDate { get; set; }
@@ -24,27 +26,19 @@ namespace apiAnimal.Models
             public string animalChip { get; set; }
             public string animalHealthy { get; set; }
             public string animalDisease_Other { get; set; }
-            public Nullable<int> animalOwner_userID { get; set; }
+            public string animalOwner_userID { get; set; }
             public string animalReason { get; set; }
-            public Nullable<int> animalGetter_userID { get; set; }
+            public string animalGetter_userID { get; set; }
             public string animalAdopted { get; set; }
             public string animalAdoptedDate { get; set; }
             public string animalNote { get; set; }
 
-            [JsonIgnore]
-            public virtual animalData_Type animalData_Type { get; set; }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+          
+            public IQueryable<animalData_Pic> animalData_Pic { get; set; }
+            
+            public IQueryable<animalData_Condition> animalData_Condition { get; set; }
 
-            [JsonIgnore]
-            public virtual ICollection<animalData_Pic> animalData_Pic { get; set; }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-            [JsonIgnore]
-            public virtual ICollection<animalData_Condition> animalData_Condition { get; set; }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-            [JsonIgnore]
-            public virtual ICollection<animalData_Condition> animalData_Condition1 { get; set; }
+ 
         }
     }
 }

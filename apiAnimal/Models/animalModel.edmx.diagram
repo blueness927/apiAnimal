@@ -6,10 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="794b75d100e34ee38deddd44a3e41782" Name="Diagram1">
         <EntityTypeShape EntityType="petstationModel.animalData" Width="2.125" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="petstationModel.animalData_Condition" Width="1.5" PointX="6.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="petstationModel.animalData_Pic" Width="1.5" PointX="6.5" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="petstationModel.animalData_Type" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
-        <AssociationConnector Association="petstationModel.FK__animalDat__anima__286302EC" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="petstationModel.animalData_Condition" Width="3.875" PointX="6.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="petstationModel.animalData_Pic" Width="3" PointX="6.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="petstationModel.animalData_Type" Width="1.5" PointX="0.5" PointY="1.25" IsExpanded="true" />
         <AssociationConnector Association="petstationModel.FK__animalDat__anima__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="petstationModel.FK__animalDat__condi__3B75D760" ManuallyRouted="false" />
         <AssociationConnector Association="petstationModel.FK__animalDat__condi__440B1D61" ManuallyRouted="false" />

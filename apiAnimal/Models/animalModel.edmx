@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="petstationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="petstationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="animalData">
           <Key>
             <PropertyRef Name="animalID" />
           </Key>
           <Property Name="animalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="animalData_animalTypeID" Type="int" />
+          <Property Name="animalKind" Type="nvarchar" MaxLength="50" />
+          <Property Name="animalType" Type="nvarchar" MaxLength="50" />
           <Property Name="animalName" Type="nvarchar" MaxLength="50" />
           <Property Name="animalAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="animalDate" Type="nvarchar" MaxLength="50" />
@@ -21,9 +22,9 @@
           <Property Name="animalChip" Type="nvarchar" MaxLength="50" />
           <Property Name="animalHealthy" Type="nvarchar" MaxLength="50" />
           <Property Name="animalDisease_Other" Type="nvarchar" MaxLength="200" />
-          <Property Name="animalOwner_userID" Type="int" />
+          <Property Name="animalOwner_userID" Type="nvarchar" MaxLength="128" />
           <Property Name="animalReason" Type="nvarchar" MaxLength="50" />
-          <Property Name="animalGetter_userID" Type="int" />
+          <Property Name="animalGetter_userID" Type="nvarchar" MaxLength="128" />
           <Property Name="animalAdopted" Type="nvarchar" MaxLength="50" />
           <Property Name="animalAdoptedDate" Type="nvarchar" MaxLength="50" />
           <Property Name="animalNote" Type="nvarchar(max)" />
@@ -59,20 +60,10 @@
           <Property Name="animalKind" Type="nvarchar" MaxLength="50" />
           <Property Name="animalType" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK__animalDat__anima__286302EC">
-          <End Role="animalData_Type" Type="Self.animalData_Type" Multiplicity="0..1" />
-          <End Role="animalData" Type="Self.animalData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="animalData_Type">
-              <PropertyRef Name="animalTypeID" />
-            </Principal>
-            <Dependent Role="animalData">
-              <PropertyRef Name="animalData_animalTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__animalDat__anima__38996AB5">
-          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+        <Association Name="FK__animalDat__anima__32AB8735">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="animalData_Pic" Type="Self.animalData_Pic" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="animalData">
@@ -83,20 +74,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__animalDat__condi__3B75D760">
-          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
-          <End Role="animalData_Condition" Type="Self.animalData_Condition" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="animalData">
-              <PropertyRef Name="animalID" />
-            </Principal>
-            <Dependent Role="animalData_Condition">
-              <PropertyRef Name="condition_animalID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__animalDat__condi__440B1D61">
-          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
+        <Association Name="FK__animalDat__condi__3D2915A8">
+          <End Role="animalData" Type="Self.animalData" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="animalData_Condition" Type="Self.animalData_Condition" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="animalData">
@@ -112,25 +93,16 @@
           <EntitySet Name="animalData_Condition" EntityType="Self.animalData_Condition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="animalData_Pic" EntityType="Self.animalData_Pic" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="animalData_Type" EntityType="Self.animalData_Type" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__animalDat__anima__286302EC" Association="Self.FK__animalDat__anima__286302EC">
-            <End Role="animalData_Type" EntitySet="animalData_Type" />
-            <End Role="animalData" EntitySet="animalData" />
-          </AssociationSet>
-          <AssociationSet Name="FK__animalDat__anima__38996AB5" Association="Self.FK__animalDat__anima__38996AB5">
+          <AssociationSet Name="FK__animalDat__anima__32AB8735" Association="Self.FK__animalDat__anima__32AB8735">
             <End Role="animalData" EntitySet="animalData" />
             <End Role="animalData_Pic" EntitySet="animalData_Pic" />
           </AssociationSet>
-          <AssociationSet Name="FK__animalDat__condi__3B75D760" Association="Self.FK__animalDat__condi__3B75D760">
-            <End Role="animalData" EntitySet="animalData" />
-            <End Role="animalData_Condition" EntitySet="animalData_Condition" />
-          </AssociationSet>
-          <AssociationSet Name="FK__animalDat__condi__440B1D61" Association="Self.FK__animalDat__condi__440B1D61">
+          <AssociationSet Name="FK__animalDat__condi__3D2915A8" Association="Self.FK__animalDat__condi__3D2915A8">
             <End Role="animalData" EntitySet="animalData" />
             <End Role="animalData_Condition" EntitySet="animalData_Condition" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="petstationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -139,7 +111,6 @@
             <PropertyRef Name="animalID" />
           </Key>
           <Property Name="animalID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="animalData_animalTypeID" Type="Int32" />
           <Property Name="animalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -150,16 +121,16 @@
           <Property Name="animalChip" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalHealthy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalDisease_Other" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="animalOwner_userID" Type="Int32" />
+          <Property Name="animalOwner_userID" Type="String" />
           <Property Name="animalReason" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="animalGetter_userID" Type="Int32" />
+          <Property Name="animalGetter_userID" Type="String" />
           <Property Name="animalAdopted" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalAdoptedDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalNote" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="animalData_Type" Relationship="Self.FK__animalDat__anima__286302EC" FromRole="animalData" ToRole="animalData_Type" />
           <NavigationProperty Name="animalData_Pic" Relationship="Self.FK__animalDat__anima__38996AB5" FromRole="animalData" ToRole="animalData_Pic" />
           <NavigationProperty Name="animalData_Condition" Relationship="Self.FK__animalDat__condi__3B75D760" FromRole="animalData" ToRole="animalData_Condition" />
-          <NavigationProperty Name="animalData_Condition1" Relationship="Self.FK__animalDat__condi__440B1D61" FromRole="animalData" ToRole="animalData_Condition" />
+          <Property Name="animalKind" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="animalType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="animalData_Condition">
           <Key>
@@ -176,7 +147,6 @@
           <Property Name="conditionFee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="conditionOther" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="animalData" Relationship="Self.FK__animalDat__condi__3B75D760" FromRole="animalData_Condition" ToRole="animalData" />
-          <NavigationProperty Name="animalData1" Relationship="Self.FK__animalDat__condi__440B1D61" FromRole="animalData_Condition" ToRole="animalData" />
         </EntityType>
         <EntityType Name="animalData_Pic">
           <Key>
@@ -194,20 +164,7 @@
           <Property Name="animalTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="animalKind" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="animalType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="animalData" Relationship="Self.FK__animalDat__anima__286302EC" FromRole="animalData_Type" ToRole="animalData" />
         </EntityType>
-        <Association Name="FK__animalDat__anima__286302EC">
-          <End Role="animalData_Type" Type="Self.animalData_Type" Multiplicity="0..1" />
-          <End Role="animalData" Type="Self.animalData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="animalData_Type">
-              <PropertyRef Name="animalTypeID" />
-            </Principal>
-            <Dependent Role="animalData">
-              <PropertyRef Name="animalData_animalTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__animalDat__anima__38996AB5">
           <End Role="animalData" Type="Self.animalData" Multiplicity="0..1" />
           <End Role="animalData_Pic" Type="Self.animalData_Pic" Multiplicity="*" />
@@ -249,10 +206,6 @@
           <EntitySet Name="animalData_Condition" EntityType="Self.animalData_Condition" />
           <EntitySet Name="animalData_Pic" EntityType="Self.animalData_Pic" />
           <EntitySet Name="animalData_Type" EntityType="Self.animalData_Type" />
-          <AssociationSet Name="FK__animalDat__anima__286302EC" Association="Self.FK__animalDat__anima__286302EC">
-            <End Role="animalData_Type" EntitySet="animalData_Type" />
-            <End Role="animalData" EntitySet="animalData" />
-          </AssociationSet>
           <AssociationSet Name="FK__animalDat__anima__38996AB5" Association="Self.FK__animalDat__anima__38996AB5">
             <End Role="animalData" EntitySet="animalData" />
             <End Role="animalData_Pic" EntitySet="animalData_Pic" />
@@ -275,8 +228,9 @@
           <EntitySetMapping Name="animalData">
             <EntityTypeMapping TypeName="petstationModel.animalData">
               <MappingFragment StoreEntitySet="animalData">
+                <ScalarProperty Name="animalType" ColumnName="animalType" />
+                <ScalarProperty Name="animalKind" ColumnName="animalKind" />
                 <ScalarProperty Name="animalID" ColumnName="animalID" />
-                <ScalarProperty Name="animalData_animalTypeID" ColumnName="animalData_animalTypeID" />
                 <ScalarProperty Name="animalName" ColumnName="animalName" />
                 <ScalarProperty Name="animalAddress" ColumnName="animalAddress" />
                 <ScalarProperty Name="animalDate" ColumnName="animalDate" />

@@ -14,17 +14,8 @@ namespace apiAnimal.Models
     
     public partial class animalData_Type
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public animalData_Type()
-        {
-            this.animalData = new HashSet<animalData>();
-        }
-    
         public int animalTypeID { get; set; }
         public string animalKind { get; set; }
         public string animalType { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<animalData> animalData { get; set; }
     }
 }
