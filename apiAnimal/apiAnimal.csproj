@@ -34,6 +34,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\apiAnimal.XML</DocumentationFile>
+    <IncludeIisSettings>false</IncludeIisSettings>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +44,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <FilesToIncludeForPublish>AllFilesInProjectFolder</FilesToIncludeForPublish>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -235,6 +238,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\v1\AnimalDatasController.cs" />
     <Compile Include="Controllers\v1\animalData_PicController.cs" />
+    <Compile Include="Controllers\v1\MsgsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -265,9 +269,66 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>animalModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\board.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\follow.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\forum.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\forum_reply.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\map.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Msg.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Partials\animalData.cs" />
     <Compile Include="Models\Partials\animalData_Pic.cs" />
     <Compile Include="Models\Partials\animalDataType.cs" />
+    <Compile Include="Models\petFAQ.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\petKnows.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\petTodo.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\remind.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\search.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\shelter.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\todoData.cs">
+      <DependentUpon>animalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

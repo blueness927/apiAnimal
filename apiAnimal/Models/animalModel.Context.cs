@@ -29,5 +29,24 @@ namespace apiAnimal.Models
         public virtual DbSet<animalData_Condition> animalData_Condition { get; set; }
         public virtual DbSet<animalData_Pic> animalData_Pic { get; set; }
         public virtual DbSet<animalData_Type> animalData_Type { get; set; }
+        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<board> board { get; set; }
+        public virtual DbSet<follow> follow { get; set; }
+        public virtual DbSet<forum> forum { get; set; }
+        public virtual DbSet<forum_reply> forum_reply { get; set; }
+        public virtual DbSet<map> map { get; set; }
+        public virtual DbSet<Msg> Msg { get; set; }
+        public virtual DbSet<petFAQ> petFAQ { get; set; }
+        public virtual DbSet<petKnows> petKnows { get; set; }
+        public virtual DbSet<petTodo> petTodo { get; set; }
+        public virtual DbSet<remind> remind { get; set; }
+        public virtual DbSet<search> search { get; set; }
+        public virtual DbSet<shelter> shelter { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<todoData> todoData { get; set; }
     }
 }

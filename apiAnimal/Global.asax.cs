@@ -17,9 +17,10 @@ namespace apiAnimal
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             GlobalConfiguration.Configuration.EnableCors();
             AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configuration.IncludeErrorDetailPolicy= IncludeErrorDetailPolicy.Always;
             //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling= Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling= Newtonsoft.Json.PreserveReferencesHandling.All;
-            
+
 
         }
     }

@@ -9,9 +9,10 @@
 
 namespace apiAnimal.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class animalData
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,6 +20,10 @@ namespace apiAnimal.Models
         {
             this.animalData_Pic = new HashSet<animalData_Pic>();
             this.animalData_Condition = new HashSet<animalData_Condition>();
+            this.board = new HashSet<board>();
+            this.petTodo = new HashSet<petTodo>();
+            this.AspNetUsers = new HashSet<AspNetUsers>();
+            this.AspNetUsers1 = new HashSet<AspNetUsers>();
         }
     
         public int animalID { get; set; }
@@ -41,8 +46,19 @@ namespace apiAnimal.Models
         public string animalKind { get; set; }
         public string animalType { get; set; }
     
-        public virtual ICollection<animalData_Pic> animalData_Pic { get; set; }
         
+        public virtual ICollection<animalData_Pic> animalData_Pic { get; set; }
+       
         public virtual ICollection<animalData_Condition> animalData_Condition { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<board> board { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<petTodo> petTodo { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<AspNetUsers> AspNetUsers { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<AspNetUsers> AspNetUsers1 { get; set; }
     }
 }

@@ -13,7 +13,6 @@ namespace apiAnimal.Controllers
     {
         // GET api/<controller>
         public petstationEntities db = new petstationEntities();
-     
 
     }
 

@@ -141,7 +141,6 @@ namespace apiAnimal.Controllers.v1
             return Ok(animalData);
         }
 
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -150,7 +149,6 @@ namespace apiAnimal.Controllers.v1
             }
             base.Dispose(disposing);
         }
-
 
         private bool animalDataExists(int id)
         {
